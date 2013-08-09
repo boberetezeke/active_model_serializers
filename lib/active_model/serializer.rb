@@ -266,6 +266,7 @@ module ActiveModel
         options = default_options.merge(options || {})
 
         serializer = options.delete(:serializer) ||
+          (options[:serializers] && options[:serializers][resource.class.to_s]) ||
           (resource.respond_to?(:active_model_serializer) &&
            resource.active_model_serializer)
 

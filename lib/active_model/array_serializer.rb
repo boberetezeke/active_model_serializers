@@ -47,6 +47,8 @@ module ActiveModel
       object.map do |item|
         if options.has_key? :each_serializer
           serializer = options[:each_serializer]
+        elsif options[:serializers]
+          serializer = options[:serializers][item.class.to_s].constantize
         elsif item.respond_to?(:active_model_serializer)
           serializer = item.active_model_serializer
         end
